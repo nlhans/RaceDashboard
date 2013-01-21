@@ -1,0 +1,3 @@
+This is the firmware source code for my simulator racing dashboard. The firmware runs on a PIC32MX440F512H microcontroller.
+
+The data is sent from SimTelemetry program (https://github.com/nlhans/SimTelemetry) which communicates with the dashboard over a serial port.
