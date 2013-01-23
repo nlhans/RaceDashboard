@@ -30,7 +30,7 @@ UI32_t pbClk = 0;
 
 void Dashboard_U1Handler(UI08_t uart, UI08_t* fr);
 
-void delay(unsigned int count)
+volatile void delay(unsigned int count)
 {
     //while(--count);
 }

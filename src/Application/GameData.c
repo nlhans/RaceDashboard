@@ -148,10 +148,13 @@ void GameData_Tick(void)
 				case DS_L_Speed:
 		
 					// Speed in kmh
-					sprintf(bf, "%03d", Data_Game.HS.Speed);
-					for (i = 0 ;i < 3 ; i++)
-						Segment_Set(1+i, bf[i]-'0');
-		
+					sprintf(bf, "% 4d", Data_Game.HS.Speed);
+					for (i = 0 ;i < 4; i++)
+                                            if (bf[i] == ' ')
+                                                Segment_Set(i, DISPLAY_CLEARED);
+                                            else
+						Segment_Set(i, bf[i]-'0');
+
 					break;
 				case DS_L_SplitLap:
 				case DS_L_SplitRace:
@@ -238,10 +241,14 @@ void GameData_Tick(void)
 				
 			case DS_R_RPM:
 				rpm = Data_Game.HS.RPM / 10.0;
-				sprintf(bf, "%04d", rpm);
+				sprintf(bf, "% 4d", rpm);
 				for(i = 8; i < 12; i++)
+                                {
+                                    if (bf[i-8] == ' ')
+                                        Segment_Set(i, DISPLAY_CLEARED);
+                                    else
 					Segment_Set(i, bf[i-8]-'0');
-	
+                                }
 				// Oil
                                 float tmp;
                                 memcpy(&tmp, &Data_Game.HS.Gap_Front, sizeof(float));
