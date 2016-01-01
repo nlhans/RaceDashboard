@@ -250,22 +250,22 @@ void GameData_Tick(void)
 					Segment_Set(i, bf[i-8]-'0');
                                 }
 				// Oil
-                                float tmp;
-                                memcpy(&tmp, &Data_Game.HS.Gap_Front, sizeof(float));
-                                if (tmp < 0) tmp = 0-tmp;
-                                while (tmp >= 10.0f) tmp = tmp - 10.0f;
-
-				sprintf(bf, "%f", tmp);
+				sprintf(bf, "% 4d", Data_Game.HS.Throttle/2);
 
                                 bf[1] = bf[0];
 
-				for(i = 5; i < 8; i++)
+				for(i = 4; i < 8; i++)
+                                {
+                                    if (bf[i-4] == ' ')
+                                        Segment_Set(i, DISPLAY_CLEARED);
+                                    else
 					Segment_Set(i, bf[i-4]-'0');
+                                }
 
-                                if (Data_Game.HS.Gap_Front < 0)
+                                /*if (Data_Game.HS.Gap_Front < 0)
                                     Segment_Set(4, DISPLAY_N);
                                 else
-                                    Segment_Set(4, DISPLAY_CLEARED);
+                                    Segment_Set(4, DISPLAY_CLEARED);*/
 	
 				break;
 			case DS_R_Laptime_Current:
